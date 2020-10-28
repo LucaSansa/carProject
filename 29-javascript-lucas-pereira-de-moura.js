@@ -33,7 +33,6 @@
   var app = (function appController(){
     return {
       init: function(){
-        console.log('app init');
         this.companyInfo();
         this.initEvents();
       },
@@ -44,7 +43,6 @@
 
       handleSubmit: function handleSubmit(e){
         e.preventDefault();
-        console.log('submit');
         var $tableCar = $('[data-js="table-car"]').get();
         $tableCar.appendChild(app.createNewCar())
       },
@@ -67,11 +65,21 @@
         $tdPlate.textContent = $('[data-js="plate"]').get().value;
         $tdColor.textContent = $('[data-js="color"]').get().value;
 
+        //-------------
+        var $tdButtonRemove = document.createElement('button');
+        $tdButtonRemove.innerHTML = '<p>Remover</p>'
+        $tdButtonRemove.addEventListener('click', function(e){
+          $tr.parentNode.removeChild($tr);
+        }, false);
+        //-------------
+
         $tr.appendChild($tdImage);
         $tr.appendChild($tdBrand);
         $tr.appendChild($tdYear);
         $tr.appendChild($tdPlate);
         $tr.appendChild($tdColor);
+
+        $tr.appendChild($tdButtonRemove);
 
         return $fragment.appendChild($tr)
       },
